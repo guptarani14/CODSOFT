@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.calculator {
+  background: #222;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  width: 360px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#display {
+  height: 60px;
+  font-size: 32px;
+  background-color: #333;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: right;
+  letter-spacing: 1.5px;
+  user-select: none;
+  overflow-x: auto;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+button {
+  padding: 20px 0;
+  font-size: 22px;
+  border: none;
+  border-radius: 15px;
+  background-color: #444;
+  color: #eee;
+  cursor: pointer;
+  box-shadow: 0 4px #111;
+  transition: background-color 0.25s, box-shadow 0.15s;
+  user-select: none;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+button:active {
+  box-shadow: 0 2px #111;
+  transform: translateY(2px);
+}
+
+.btn-clear {
+  background-color: #ff4d4d;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-clear:hover {
+  background-color: #e04343;
+}
+
+.btn-equal {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  grid-column: span 1;
+}
+
+.btn-equal:hover {
+  background-color: #3a923a;
+}
+
+.btn-zero {
+  grid-column: span 2;
+}
+
+</style>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly />
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="deleteLast()">⌫</button>
+      <button onclick="append('.')">.</button>
+      <button onclick="append('/')">÷</button>
+
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('*')">×</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('-')">−</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('+')">+</button>
+
+      <button onclick="append('0')" class="zero">0</button>
+      <button onclick="calculate()" class="equal">=</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+
+function append(value) {
+  display.value += value;
+}
+
+function clearDisplay() {
+  display.value = '';
+}
+
+function deleteLast() {
+  display.value = display.value.slice(0, -1);
+}
+
+function calculate() {
+  try {
+    display.value = eval(display.value);
+  } catch {
+    display.value = "Error";
+  }
+}
+
+  </script>
+</body>
+</html>
